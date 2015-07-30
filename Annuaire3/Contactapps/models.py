@@ -12,6 +12,7 @@ class User(models.Model):
 	def __unicode__(self):
 		return self.username
 	
+
 class Lieu(models.Model):
 	pays = models.CharField(max_length=255)
 	region = models.CharField(max_length=255)
@@ -30,7 +31,7 @@ class Contact(models.Model):
 	lieu = models.ForeignKey(Lieu) 
 	names = models.TextField()
 	secondnames = models.TextField()
-	birthday = models.DateTimeField()
+	birthday = models.TextField()
 	date_creation = models.DateTimeField()
 
 	def __unicode__(self):
