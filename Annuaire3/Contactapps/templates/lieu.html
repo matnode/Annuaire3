@@ -1,0 +1,28 @@
+<html>
+
+<head>
+	<title> Un gestionnaire contact perso </title>
+</head>
+
+<body>
+	<h1> Paramètrage de votre application  </h1>
+	
+<br>
+<br>
+
+<h2> Enregistrez un lieu</h2>
+
+	<form method="POST" action="/user/nouveaulieu/">{% csrf_token %}
+		<label id="pays" >Pays </label> 
+			<input  id="pays" type="text" name="pays"><br>
+		<label id="region" >Region </label>
+			<input id="region" type="text" name="region"> <br>
+		<label id="ville" > Ville </label>
+			<input id="ville" type="text" name="ville"> <br>  <br>
+		<button type="submit"> Enregistrez </button>
+	</form>
+
+</body>
+
+
+</html>

@@ -3,7 +3,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from Contactapps.models import User
+from Contactapps.models import User, Lieu
 from django.utils import timezone
 import random, sha, string
 
@@ -31,3 +31,19 @@ def index(request):
 		u.save()
 
 	return render_to_response("templates/index.html", context_instance=RequestContext(request))
+
+
+def nouveaulieu(request):
+	#on demarre avec l'enregistrement d'un nouveau lieu
+	if request.method == 'POST':
+		#on sauvegarde le tout dans notre base de donnees
+		l = Lieu(
+			pays = request.POST['pays'],
+			region = request.POST['region'],
+			ville = request.POST['ville']	
+		)
+
+		l.save()	
+	
+	return render_to_response("templates/lieu.html", context_instance=RequestContext(request))
+

@@ -1,8 +1,7 @@
 # temporaires
 *.py~
 *.html~
-.*.swp
-*~
+*.swp
 
 #fichier binaire
 *.pyc
