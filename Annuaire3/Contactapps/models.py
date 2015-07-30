@@ -12,18 +12,6 @@ class User(models.Model):
 	def __unicode__(self):
 		return self.username
 	
-
-class Contact(models.Model):
-	names = models.TextField()
-	secondnames = models.TextField()
-	birthday = models.DateTimeField()
-	date_creation = models.DateTimeField()
-
-	def __unicode__(self):
-		return self.names
-	def __unicode__(self):
-		return self.secondnames
-
 class Lieu(models.Model):
 	pays = models.CharField(max_length=255)
 	region = models.CharField(max_length=255)
@@ -35,3 +23,18 @@ class Lieu(models.Model):
 		return self.region
 	def __unicode__(self):
 		return self.ville
+
+
+class Contact(models.Model):
+	user = models.ForeignKey(User)
+	lieu = models.ForeignKey(Lieu) 
+	names = models.TextField()
+	secondnames = models.TextField()
+	birthday = models.DateTimeField()
+	date_creation = models.DateTimeField()
+
+	def __unicode__(self):
+		return self.names
+	def __unicode__(self):
+		return self.secondnames
+

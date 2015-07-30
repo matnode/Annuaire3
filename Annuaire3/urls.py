@@ -16,4 +16,5 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls))
     url(r'^user/$', 'Contactapps.views.index'),
     url(r'^user/nouveaulieu/$', 'Contactapps.views.nouveaulieu')
+    url(r'^user/nouveaucontact/$', 'Contactapps.views.nouveaucontact')
 )
