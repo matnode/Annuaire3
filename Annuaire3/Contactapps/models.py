@@ -1,17 +1,18 @@
 from django.db import models
-import sha
+from django.contrib.auth.models import User
+
 # Create your models here.
 
-class User(models.Model):
-	username = models.CharField(max_length=255)
+class Human(models.Model):
+	user = models.OneToOneField(User)
 	skypeid = models.CharField(max_length=255) 
-	password_salt = models.CharField(max_length=8, null=True)
-	password_hash = models.CharField(max_length=40, null=True)
-	date_creation = models.DateTimeField()
+	online = models.CharField(max_length=1)	
 	
 	def __unicode__(self):
-		return self.username
-	
+		return self.skypeid
+	def __unicode__(self):
+		return self.online
+
 
 class Lieu(models.Model):
 	pays = models.CharField(max_length=255)
@@ -27,7 +28,7 @@ class Lieu(models.Model):
 
 
 class Contact(models.Model):
-	user = models.ForeignKey(User)
+	human = models.ForeignKey(Human)
 	lieu = models.ForeignKey(Lieu) 
 	names = models.TextField()
 	secondnames = models.TextField()
