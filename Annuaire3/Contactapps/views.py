@@ -1,6 +1,7 @@
 # Create your views here.
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from Contactapps.models import User, Lieu, Contact
@@ -43,7 +44,9 @@ def nouveaulieu(request):
 			ville = request.POST['ville']	
 		)
 
-		l.save()	
+		l.save()
+		#une fois le lieu enregistrer on redirige vers la page de listing des lieux presents
+		return HttpResponseRedirect(reverse('Contactapps.views.lieux'))	
 	
 	return render_to_response("templates/lieu.html", context_instance=RequestContext(request))
 
@@ -73,11 +76,17 @@ def nouveaucontact(request):
 	return render_to_response("templates/contact.html",{'leslieux':leslieux},context_instance=RequestContext(request))
 
 
-def contact(request):	
+def contacts(request):	
 	
 	#1. on prefixe l'utilisateur qui enregistre ses contacts car on a pas encore l'authentification
 	currentuser = get_object_or_404(User, pk=1)		
 	mescontacts = Contact.objects.filter(user=currentuser)		
 	return render_to_response("templates/listecontact.html",{'mescontacts':mescontacts,'currentuser': currentuser},context_instance=RequestContext(request))
+
+def lieux(request):	
+	
+	#1. on liste tous les lieux 
+	leslieux = Lieu.objects.all()		
+	return render_to_response("templates/listelieux.html",{'leslieux':leslieux})
 
 

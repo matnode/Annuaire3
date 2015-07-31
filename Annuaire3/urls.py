@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^user/nouveaulieu/$', 'Contactapps.views.nouveaulieu'),
     url(r'^user/nouveaucontact/$', 'Contactapps.views.nouveaucontact'),
     #url utiliser pour le listing des donnees (utilisateur, lieu et contact)
-    url(r'^user/contact/$', 'Contactapps.views.contact')
+    url(r'^user/contact/$', 'Contactapps.views.contacts'),
+    url(r'^user/lieu/$', 'Contactapps.views.lieux'),    
 
 )

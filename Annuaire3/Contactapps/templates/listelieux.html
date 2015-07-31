@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<title> Gestionnaire de contact</title>
+</head>
+
+<body>
+
+<h1> 
+	La liste des Lieux disponible 
+</h1>
+
+<a href="/user/nouveaulieu/"> Ajouter un lieu  </a> <br>
+
+<table border=1>
+		
+		<tr>	 	
+			<th> Pays </th>
+			<th> Région </th>
+			<th> Ville </th>		
+		</tr>
+
+	{% for lieu in leslieux  %}
+		<tr>		 	
+			<td> {{lieu.pays}} </td> 
+			<td> {{lieu.region}} </td>
+			<td> {{lieu.ville}} </td> 			
+		</tr>
+	{% endfor %}		
+
+</table>
+
+</body>
+
+</html>
