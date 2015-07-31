@@ -10,7 +10,7 @@
 	La liste des Lieux disponible 
 </h1>
 
-<a href="/user/nouveaulieu/"> Ajouter un lieu  </a> <br>
+<a href="/user/nouveaulieu/" style="text-decoration:none;"> Ajouter un lieu  {{currentuser.user.username}}  </a> <br>
 
 <table border=1>
 		
@@ -26,7 +26,9 @@
 			<td> {{lieu.region}} </td>
 			<td> {{lieu.ville}} </td> 			
 		</tr>
-	{% endfor %}		
+	{% endfor %}	
+
+	
 
 </table>
 

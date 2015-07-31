@@ -85,14 +85,14 @@ def contacts(request):
 	mescontacts = Contact.objects.filter(human=currentuser)		
 	return render_to_response("templates/listecontact.html",{'mescontacts':mescontacts,'currentuser': currentuser},context_instance=RequestContext(request))
 
+
 @login_required(login_url='/connexion/',redirect_field_name='rediriger_vers')
-
-
 def lieux(request):	
 	
 	#1. on liste tous les lieux 
-	leslieux = Lieu.objects.all()		
-	return render_to_response("templates/listelieux.html",{'leslieux':leslieux})
+	leslieux = Lieu.objects.all()	
+	currentuser =request	
+	return render_to_response("templates/listelieux.html",{'leslieux':leslieux,'currentuser':currentuser})
 
 
 def users(request):	
