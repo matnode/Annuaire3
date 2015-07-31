@@ -2,14 +2,11 @@
 *.py~
 *.html~
 *.swp
+*.db
 
 #fichier binaire
 *.pyc
 *.pyo
-
-#database
-*.db
-db.sqlite
 
 #configuration du projet
 conf.py

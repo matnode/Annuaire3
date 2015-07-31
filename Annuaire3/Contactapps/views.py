@@ -1,7 +1,7 @@
 # Create your views here.
 
 from django.http import HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from Contactapps.models import User, Lieu, Contact
 from django.utils import timezone
@@ -53,7 +53,7 @@ def nouveaucontact(request):
 	#1. on doit d'abord reccuperer toutes les lieux deja params dans la bd
 	leslieux = Lieu.objects.all()	
 	##. on prefixe l'utilisateur qui enregistre ses contacts car on a pas encore l'authentification
-	currentuser =  User.objects.get(pk=1)
+	currentuser =  User.objects.get(pk=2)
 	if request.method == 'POST':
 		#on reccupere au preablable le lieu selectionner
 		l = Lieu.objects.get(pk=request.POST['lieu'])
@@ -71,4 +71,13 @@ def nouveaucontact(request):
 		c.save()
 			
 	return render_to_response("templates/contact.html",{'leslieux':leslieux},context_instance=RequestContext(request))
+
+
+def contact(request):	
+	
+	#1. on prefixe l'utilisateur qui enregistre ses contacts car on a pas encore l'authentification
+	currentuser = get_object_or_404(User, pk=1)		
+	mescontacts = Contact.objects.filter(user=currentuser)		
+	return render_to_response("templates/listecontact.html",{'mescontacts':mescontacts,'currentuser': currentuser},context_instance=RequestContext(request))
+
 

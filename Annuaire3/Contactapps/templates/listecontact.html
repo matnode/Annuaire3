@@ -1,0 +1,33 @@
+<html>
+
+<head>
+	<title> Mes contacts</title>
+</head>
+
+<body>
+
+<h1> 
+	La liste de vos contacts {{currentuser.username}}
+</h1>
+
+<table border=1>
+	<tr>	 	
+		<th> Noms </th>
+		<th> Prénoms </th>
+		<th> ville </th>		
+	</tr>
+
+	{% for contact in mescontacts  %}
+		<tr>		 	
+			<td> {{contact.names}} </td> 
+			<td> {{contact.secondnames}} </td>
+			<td> {{contact.lieu.ville}} </td> 			
+			<td> <a href="#"> détail </a></td>
+		</tr>
+	{% endfor %}		
+
+</table>
+
+</body>
+
+</html>

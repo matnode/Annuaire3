@@ -14,7 +14,11 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls))
+    # url utiliser pour l'insertion des donnees(utilisateur, lieu et contact)
     url(r'^user/$', 'Contactapps.views.index'),
     url(r'^user/nouveaulieu/$', 'Contactapps.views.nouveaulieu'),
-    url(r'^user/nouveaucontact/$', 'Contactapps.views.nouveaucontact')
+    url(r'^user/nouveaucontact/$', 'Contactapps.views.nouveaucontact'),
+    #url utiliser pour le listing des donnees (utilisateur, lieu et contact)
+    url(r'^user/contact/$', 'Contactapps.views.contact')
+
 )
