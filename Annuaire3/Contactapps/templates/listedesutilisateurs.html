@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<title> Gestionnaire de contact</title>
+</head>
+
+<body>
+
+<h1> 
+	La liste des Utilisateurs disponible 
+</h1>
+
+<a href="/user/"> Ajouter un utilisateur  </a> <br>
+
+<table border=1>
+		
+		<tr>	 	
+			<th> Nom d'utilisateur </th>
+			<th> skypeId </th>
+			<th> datecreation </th>		
+		</tr>
+
+	{% for user in utilisateurs  %}
+		<tr>		 	
+			<td> {{user.username}} </td> 
+			<td> {{user.skypeid}} </td>
+			<td> {{user.date_creation}} </td> 			
+		</tr>
+	{% endfor %}		
+
+</table>
+
+</body>
+
+</html>

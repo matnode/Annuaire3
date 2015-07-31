@@ -21,5 +21,5 @@ urlpatterns = patterns('',
     #url utiliser pour le listing des donnees (utilisateur, lieu et contact)
     url(r'^user/contact/$', 'Contactapps.views.contacts'),
     url(r'^user/lieu/$', 'Contactapps.views.lieux'),    
-
+    url(r'^user/listedesutilisateurs/$', 'Contactapps.views.users'),
 )

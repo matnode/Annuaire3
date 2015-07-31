@@ -89,4 +89,10 @@ def lieux(request):
 	leslieux = Lieu.objects.all()		
 	return render_to_response("templates/listelieux.html",{'leslieux':leslieux})
 
+def users(request):	
+	
+	#1. on liste tous les lieux 
+	utilisateurs = User.objects.all()		
+	return render_to_response("templates/listedesutilisateurs.html",{'utilisateurs':utilisateurs})
+
 
