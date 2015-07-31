@@ -52,13 +52,15 @@ def nouveaulieu(request):
 	
 	return render_to_response("templates/lieu.html", context_instance=RequestContext(request))
 
+
+@login_required(login_url='/connexion/',redirect_field_name='rediriger_vers')
 def nouveaucontact(request):
 	#on demarre avec l'enregistrement d'un nouveau lieu
 	
 	#1. on doit d'abord reccuperer toutes les lieux deja params dans la bd
 	leslieux = Lieu.objects.all()	
-	##. on prefixe l'utilisateur qui enregistre ses contacts car on a pas encore l'authentification
-	currentuser =  Human.objects.get(pk=2)
+	##. on reccupère les informations de l'utilisateur courant
+	currentuser =request	
 	if request.method == 'POST':
 		#on reccupere au preablable le lieu selectionner
 		l = Lieu.objects.get(pk=request.POST['lieu'])
@@ -77,11 +79,11 @@ def nouveaucontact(request):
 			
 	return render_to_response("templates/contact.html",{'leslieux':leslieux},context_instance=RequestContext(request))
 
-
+@login_required(login_url='/connexion/',redirect_field_name='rediriger_vers')
 def contacts(request):	
 	
-	#1. on prefixe l'utilisateur qui enregistre ses contacts car on a pas encore l'authentification
-	currentuser = get_object_or_404(Human, pk=1)		
+	##. on reccupère les informations de l'utilisateur courant
+	currentuser =request			
 	mescontacts = Contact.objects.filter(human=currentuser)		
 	return render_to_response("templates/listecontact.html",{'mescontacts':mescontacts,'currentuser': currentuser},context_instance=RequestContext(request))
 
