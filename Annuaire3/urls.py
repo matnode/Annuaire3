@@ -22,4 +22,6 @@ urlpatterns = patterns('',
     url(r'^user/contact/$', 'Contactapps.views.contacts'),
     url(r'^user/lieu/$', 'Contactapps.views.lieux'),    
     url(r'^user/listedesutilisateurs/$', 'Contactapps.views.users'),
+    url(r'^connexion/$', 'Contactapps.views.connexion'),
+    url(r'deconnexion/$', 'Contactapps.views.deconnexion'),
 )

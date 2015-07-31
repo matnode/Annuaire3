@@ -1,0 +1,30 @@
+<html>
+
+<head>
+	<title> Un gestionnaire contact perso </title>
+</head>
+
+<body>
+	<h1> Bienvenue sur votre gestionnaire de contact  </h1>
+	
+<br>
+<br>
+
+<h2> Inscrivez-vous pour une meilleur appréciation </h2>
+
+	<form method="POST" action="/user/">{% csrf_token %}
+		<label id="username" > Nom d'utilisateur </label> 
+			<input  id="username" type="text" name="username"><br>
+		<label id="email" > Email </label> 
+			<input  id="email" type="email" name="email"><br>
+		<label id="password" > Mot de passe </label>
+			<input id="password" type="password" name="password"> <br>
+		<label id="skypeid" > Skype ID </label>
+			<input id="skypeid" type="text" name="skypeid"> <br>  <br>
+		<button type="submit"> Inscription </button>
+	</form>
+
+</body>
+
+
+</html>

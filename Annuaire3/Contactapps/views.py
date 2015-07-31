@@ -1,7 +1,9 @@
 # Create your views here.
 
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth.models import User
@@ -9,6 +11,7 @@ from Contactapps.models import Human, Lieu, Contact
 from django.utils import timezone
 import random, sha, string
 
+@login_required(redirect_field_name='rediriger_vers')
 def index(request):	
 	#On demarre avec le traitement des informations concernants l'enregistrement d'un user
 	
@@ -20,8 +23,7 @@ def index(request):
 			username = request.POST['username'],
 			email = request.POST['email'],
 			password = request.POST['password']
-		)	
-		
+		)		
 	
 		h = Human(
 			user = user,
@@ -83,6 +85,8 @@ def contacts(request):
 	mescontacts = Contact.objects.filter(human=currentuser)		
 	return render_to_response("templates/listecontact.html",{'mescontacts':mescontacts,'currentuser': currentuser},context_instance=RequestContext(request))
 
+@login_required(login_url='/connexion/',redirect_field_name='rediriger_vers')
+
 
 def lieux(request):	
 	
@@ -96,5 +100,28 @@ def users(request):
 	#1. on liste tous les lieux 
 	utilisateurs = Human.objects.all()		
 	return render_to_response("templates/listedesutilisateurs.html",{'utilisateurs':utilisateurs})
+
+
+def connexion(request):	
+	
+	if request.method == 'POST':	
+		username = request.POST['username']
+	   	password = request.POST['password']
+		user = authenticate(username=username, password=password)
+		if user is not None:
+			if user.is_active:
+				login(request, user)
+				return HttpResponseRedirect(reverse('Contactapps.views.users'))	
+			else:
+				return HttpResponse('votre compte a ete desactive')
+		else:
+			return HttpResponse('Login ou mot de passe incorrecte')			
+			
+	return render_to_response("templates/connexion.html",context_instance=RequestContext(request))
+
+
+def deconnexion(request):
+	logout(request)
+	return HttpResponseRedirect(reverse(connexion))
 
 

@@ -1,0 +1,28 @@
+<html>
+
+<head>
+	<title> Un gestionnaire contact perso </title>
+</head>
+
+<body>
+	<h1> Bienvenue sur votre gestionnaire de contact  </h1>
+	
+<br>
+<br>
+
+<h2> Connectez-vous</h2>
+
+	<form method="POST" action="/connexion/">{% csrf_token %}
+
+		<label id="username" > Nom d'utilisateur </label> 
+			<input  id="username" type="text" name="username"><br>		
+		<label id="password" > Mot de passe </label>
+			<input id="password" type="password" name="password"> <br>
+		
+		<button type="submit"> Connexion </button>
+	</form>
+
+</body>
+
+
+</html>
