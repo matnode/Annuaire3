@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.contrib.auth.models import User
 from Contactapps.models import Human, Lieu, Contact
 from django.utils import timezone
 import random, sha, string
@@ -15,16 +16,17 @@ def index(request):
 	
 	if request.method == 'POST':
 		#2. on va saler notre mot de passe puis on enregistrera notre nouvelle utilisateur
-		password = request.POST['password']
-		password_salt="".join([random.choice(string.letters) for i in range(8)])
-		password_hash=sha.sha(password_salt + password).hexdigest()
+		user = User.objects.create_user(
+			username = request.POST['username'],
+			email = request.POST['email'],
+			password = request.POST['password']
+		)	
+		
 	
 		h = Human(
-			username = request.POST['username'],
-			password_hash = password_hash,
-			password_salt = password_salt,
-			skypeid = request.POST['skypeid'],
-			date_creation = timezone.now()		
+			user = user,
+			online =0,			
+			skypeid = request.POST['skypeid'],	
 		)
 		
 		h.save()

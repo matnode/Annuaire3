@@ -16,15 +16,21 @@
 		
 		<tr>	 	
 			<th> Nom d'utilisateur </th>
+			<th> email </th>
 			<th> skypeId </th>
-			<th> datecreation </th>		
+			<th> Online </th>		
 		</tr>
 
 	{% for user in utilisateurs  %}
 		<tr>		 	
-			<td> {{user.username}} </td> 
+			<td> {{user.user.username}} </td>
+			<td> {{user.user.email}} </td>  
 			<td> {{user.skypeid}} </td>
-			<td> {{user.date_creation}} </td> 			
+			<td> 
+				
+				{{user.online}} 
+
+			</td>						
 		</tr>
 	{% endfor %}		
 
