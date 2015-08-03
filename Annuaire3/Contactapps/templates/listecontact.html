@@ -6,25 +6,37 @@
 
 <body>
 
-<h1> 
-	La liste de vos contacts {{currentuser.user.username}}
-</h1>
+{% if nombredecontact == 0  %}
+	<h1> 
+		votre liste de contacts est vide {{currentuser.user.username}}
+	</h1>
+{% else %}
+	<h1>
+		liste de vos contacts {{currentuser.user.username}}
+	</h1>
+{% endif %}
 
+<a href="/user/nouveaucontact/"> Ajouter un contact </a> | <a href="/user/consoledadministration/"> Console d'administration </a><br><br>
 <table border=1>
 	<tr>	 	
+		<th> N° </th>			
 		<th> Noms </th>
 		<th> Prénoms </th>
-		<th> ville </th>		
+		<th> ville </th>
+		<th>  </th>		
 	</tr>
 
 	{% for contact in mescontacts  %}
 		<tr>		 	
+			<td> {{forloop.counter}} </td> 
 			<td> {{contact.names}} </td> 
 			<td> {{contact.secondnames}} </td>
 			<td> {{contact.lieu.ville}} </td> 			
 			<td> <a href="#"> détail </a></td>
 		</tr>
-	{% endfor %}		
+	{% endfor %}	
+
+		
 
 </table>
 

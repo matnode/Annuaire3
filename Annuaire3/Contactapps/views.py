@@ -11,12 +11,12 @@ from Contactapps.models import Human, Lieu, Contact
 from django.utils import timezone
 import random, sha, string
 
-@login_required(redirect_field_name='rediriger_vers')
+
+
 def index(request):	
 	#On demarre avec le traitement des informations concernants l'enregistrement d'un user
 	
-	#1. on se rassure que la requete qui arrive est de type POST
-	
+	#1. on se rassure que la requete qui arrive est de type POST	
 	if request.method == 'POST':
 		#2. on va saler notre mot de passe puis on enregistrera notre nouvelle utilisateur
 		user = User.objects.create_user(
@@ -32,10 +32,13 @@ def index(request):
 		)
 		
 		h.save()
+		# quand l'on s'inscrit tout juste apres on est rediriger vers l'interface de connexion
+		return HttpResponseRedirect(reverse(connexion))
 
 	return render_to_response("templates/index.html", context_instance=RequestContext(request))
 
 
+@login_required(redirect_field_name='rediriger_vers')
 def nouveaulieu(request):
 	#on demarre avec l'enregistrement d'un nouveau lieu
 	if request.method == 'POST':
@@ -76,8 +79,11 @@ def nouveaucontact(request):
 		)
 
 		c.save()
+		#une fois le lieu enregistrer on redirige vers la page de listing des contacts
+		return HttpResponseRedirect(reverse('Contactapps.views.contacts'))	
 			
 	return render_to_response("templates/contact.html",{'leslieux':leslieux},context_instance=RequestContext(request))
+
 
 @login_required(login_url='/connexion/',redirect_field_name='rediriger_vers')
 def contacts(request):	
@@ -85,7 +91,8 @@ def contacts(request):
 	##. on reccupere les informations de l'utilisateur courant
 	currentuser =request			
 	mescontacts = Contact.objects.filter(human=currentuser.user.human.id)	
-	return render_to_response("templates/listecontact.html",{'mescontacts':mescontacts,'currentuser': currentuser},context_instance=RequestContext(request))
+	nombredecontact = mescontacts.count()
+	return render_to_response("templates/listecontact.html",{'nombredecontact':nombredecontact,'mescontacts':mescontacts,'currentuser': currentuser},context_instance=RequestContext(request))
 
 
 @login_required(login_url='/connexion/',redirect_field_name='rediriger_vers')
@@ -97,6 +104,16 @@ def lieux(request):
 	return render_to_response("templates/listelieux.html",{'leslieux':leslieux,'currentuser':currentuser})
 
 
+@login_required(login_url='/connexion/',redirect_field_name='rediriger_vers')
+def consoleadmin(request):	
+	
+	#1. on reccupere l'utilisateur courant
+	currentuser =request	
+	return render_to_response("templates/consoleadmin.html",{'currentuser':currentuser})
+
+
+
+@login_required(redirect_field_name='rediriger_vers')
 def users(request):	
 	
 	#1. on liste tous les lieux 
@@ -113,7 +130,7 @@ def connexion(request):
 		if user is not None:
 			if user.is_active:
 				login(request, user)
-				return HttpResponseRedirect(reverse('Contactapps.views.users'))	
+				return HttpResponseRedirect(reverse('Contactapps.views.contacts'))	
 			else:
 				return HttpResponse('votre compte a ete desactive')
 		else:
