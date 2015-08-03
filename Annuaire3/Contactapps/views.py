@@ -67,7 +67,7 @@ def nouveaucontact(request):
 		# on sauvegarde le nouveau contact beta dans notre base de donnee
 
 		c = Contact(
-			human = currentuser,
+			human = Human.objects.get(pk=currentuser.user.human.id),
 			lieu = l,
 			names = request.POST['nom'],
 			secondnames = request.POST['prenom'],
@@ -84,7 +84,7 @@ def contacts(request):
 	
 	##. on reccupere les informations de l'utilisateur courant
 	currentuser =request			
-	mescontacts = Contact.objects.filter(human=currentuser)		
+	mescontacts = Contact.objects.filter(human=currentuser.user.human.id)	
 	return render_to_response("templates/listecontact.html",{'mescontacts':mescontacts,'currentuser': currentuser},context_instance=RequestContext(request))
 
 
