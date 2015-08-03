@@ -5,20 +5,20 @@
 </head>
 
 <body>
-	<h1> Gestionnaire de contact de xxxxx </h1>
+	<h1> Gestionnaire de contact de {{currentuser.user.username}} </h1>
 	
 <br>
-<br>
+
 
 <h2> Nouveau contact </h2>
 
 	<form method="POST" action="/user/nouveaucontact/">{% csrf_token %}
 		<label id="nom" > Noms </label> 
-			<input  id="nom" type="text" name="nom"><br><br>
+			<input  id="nom" type="text" name="nom" required><br><br>
 		<label id="prenom" >Prénoms </label>
-			<input id="prenom" type="text" name="prenom"> <br><br>
+			<input id="prenom" type="text" name="prenom" required> <br><br>
 		<label id="dateanniv" > Date d'anniversaire </label>
-			<input id="dateanniv" type="text" name="dateanniv"> <br> <br>
+			<input id="dateanniv" type="text" name="dateanniv" > <br> <br>
 
 		<label id="villeactuel" > Ville actuelle </label>	
 		

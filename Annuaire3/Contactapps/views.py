@@ -38,6 +38,7 @@ def index(request):
 	return render_to_response("templates/index.html", context_instance=RequestContext(request))
 
 
+
 @login_required(redirect_field_name='rediriger_vers')
 def nouveaulieu(request):
 	#on demarre avec l'enregistrement d'un nouveau lieu
@@ -54,6 +55,7 @@ def nouveaulieu(request):
 		return HttpResponseRedirect(reverse('Contactapps.views.lieux'))	
 	
 	return render_to_response("templates/lieu.html", context_instance=RequestContext(request))
+
 
 
 @login_required(login_url='/connexion/',redirect_field_name='rediriger_vers')
@@ -82,7 +84,8 @@ def nouveaucontact(request):
 		#une fois le lieu enregistrer on redirige vers la page de listing des contacts
 		return HttpResponseRedirect(reverse('Contactapps.views.contacts'))	
 			
-	return render_to_response("templates/contact.html",{'leslieux':leslieux},context_instance=RequestContext(request))
+	return render_to_response("templates/contact.html",{'leslieux':leslieux,'currentuser':currentuser},context_instance=RequestContext(request))
+
 
 
 @login_required(login_url='/connexion/',redirect_field_name='rediriger_vers')
@@ -93,6 +96,7 @@ def contacts(request):
 	mescontacts = Contact.objects.filter(human=currentuser.user.human.id)	
 	nombredecontact = mescontacts.count()
 	return render_to_response("templates/listecontact.html",{'nombredecontact':nombredecontact,'mescontacts':mescontacts,'currentuser': currentuser},context_instance=RequestContext(request))
+
 
 
 @login_required(login_url='/connexion/',redirect_field_name='rediriger_vers')
@@ -121,6 +125,17 @@ def users(request):
 	return render_to_response("templates/listedesutilisateurs.html",{'utilisateurs':utilisateurs})
 
 
+@login_required(redirect_field_name='rediriger_vers')
+def detailinfocontact(request,contact_id):	
+	
+	#1. on liste tous les lieux 
+	moncontact = Contact.objects.get(pk=contact_id)	
+	#1. on reccupere l'utilisateur courant
+	currentuser =request	
+	return render_to_response("templates/detailinfocontact.html",{'moncontact':moncontact,'currentuser':currentuser})
+
+
+
 def connexion(request):	
 	
 	if request.method == 'POST':	
@@ -137,6 +152,7 @@ def connexion(request):
 			return HttpResponse('Login ou mot de passe incorrecte')			
 			
 	return render_to_response("templates/connexion.html",context_instance=RequestContext(request))
+
 
 
 def deconnexion(request):

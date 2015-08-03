@@ -1,0 +1,58 @@
+<html>
+
+<head>
+	<title> Mes contacts</title>
+</head>
+
+<body>
+
+
+
+<a href="/user/nouveaucontact/"> Ajouter un contact </a> |
+<a href="/user/contact/"> Retour </a> 
+
+<br><br>
+<table border=1>
+	<tr>						
+		
+		<td> Ajouter une photo <br>
+		
+			<form action="#" method="POST">
+				<input type="file" name="fileupload"><br>
+				<input type="submit" value="enregistrez">
+			</form>
+			
+		 </td>
+				
+	</tr>
+
+	<tr>						
+		
+		<td> {{moncontact.names}} {{moncontact.secondnames}}  </td>
+				
+	</tr>
+	
+	<tr>	 	
+					
+		<td> Date d'anniversaire:  {{moncontact.birthday}} </td>
+			
+	</tr>
+
+	<tr>	 	
+					
+		<td> localisation actuelle : {{moncontact.lieu.pays}} -> {{moncontact.lieu.region}} -> {{moncontact.lieu.ville}} </td>
+				
+	</tr>
+
+	<tr>	 	
+					
+		<td>Enregistrez le : {{moncontact.date_creation}} </td>
+				
+	</tr>
+	
+
+</table>
+
+</body>
+
+</html>
