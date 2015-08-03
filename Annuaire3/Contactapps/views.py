@@ -59,7 +59,7 @@ def nouveaucontact(request):
 	
 	#1. on doit d'abord reccuperer toutes les lieux deja params dans la bd
 	leslieux = Lieu.objects.all()	
-	##. on reccupère les informations de l'utilisateur courant
+	##. on reccupere les informations de l'utilisateur courant
 	currentuser =request	
 	if request.method == 'POST':
 		#on reccupere au preablable le lieu selectionner
@@ -82,7 +82,7 @@ def nouveaucontact(request):
 @login_required(login_url='/connexion/',redirect_field_name='rediriger_vers')
 def contacts(request):	
 	
-	##. on reccupère les informations de l'utilisateur courant
+	##. on reccupere les informations de l'utilisateur courant
 	currentuser =request			
 	mescontacts = Contact.objects.filter(human=currentuser)		
 	return render_to_response("templates/listecontact.html",{'mescontacts':mescontacts,'currentuser': currentuser},context_instance=RequestContext(request))
