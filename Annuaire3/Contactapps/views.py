@@ -9,6 +9,7 @@ from django.template import RequestContext
 from django.contrib.auth.models import User
 from Contactapps.models import Human, Lieu, Contact
 from django.utils import timezone
+from Contactapps.forms import ContactForm
 import random, sha, string
 
 
@@ -56,6 +57,22 @@ def nouveaulieu(request):
 	
 	return render_to_response("templates/lieu.html", context_instance=RequestContext(request))
 
+
+
+@login_required(redirect_field_name='rediriger_vers')
+def nouvellephoto(request, contact_id):
+	context_instance=RequestContext(request)
+	moncontact = Contact.objects.get(pk=contact_id)	
+	if request.method == 'POST':	
+		form = ContactForm(request.POST, request.FILES)	
+		if form.is_valid():	
+			moncontact.photo=form.cleaned_data['photo']
+			moncontact.save()
+		return HttpResponseRedirect(reverse('Contactapps.views.contacts'))	
+	else:
+		form = ContactForm()		
+	
+	return render_to_response('templates/detailinfocontact.html', {'moncontact': moncontact,'form':form},context_instance)
 
 
 @login_required(login_url='/connexion/',redirect_field_name='rediriger_vers')
@@ -116,7 +133,6 @@ def consoleadmin(request):
 	return render_to_response("templates/consoleadmin.html",{'currentuser':currentuser})
 
 
-
 @login_required(redirect_field_name='rediriger_vers')
 def users(request):	
 	
@@ -127,12 +143,13 @@ def users(request):
 
 @login_required(redirect_field_name='rediriger_vers')
 def detailinfocontact(request,contact_id):	
-	
+	form = ContactForm()
 	#1. on liste tous les lieux 
 	moncontact = Contact.objects.get(pk=contact_id)	
 	#1. on reccupere l'utilisateur courant
 	currentuser =request	
-	return render_to_response("templates/detailinfocontact.html",{'moncontact':moncontact,'currentuser':currentuser})
+	context_instance=RequestContext(request)
+	return render_to_response("templates/detailinfocontact.html",{'form':form,'moncontact':moncontact,'currentuser':currentuser},context_instance)
 
 
 

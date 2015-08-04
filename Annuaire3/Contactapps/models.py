@@ -34,6 +34,7 @@ class Contact(models.Model):
 	secondnames = models.TextField()
 	birthday = models.TextField()
 	date_creation = models.DateTimeField()
+	photo = models.ImageField(upload_to="photos/")
 
 	def __unicode__(self):
 		return self.names

@@ -15,11 +15,21 @@
 <table border=1>
 	<tr>						
 		
+		<td> 
+			{% if  moncontact.photo %}
+			 <img src="{{ moncontact.photo.url }}" style="width:2OOpx; height:200px;"/>		
+			{%endif%}
+		 </td>
+				
+	</tr>
+	<tr>						
+		
 		<td> Ajouter une photo <br>
 		
-			<form action="#" method="POST">
-				<input type="file" name="fileupload"><br>
-				<input type="submit" value="enregistrez">
+			<form method="post" action="/user/{{moncontact.id}}/nouvellephoto/" enctype="multipart/form-data">
+				 {% csrf_token %}
+				 {{ form.as_p }}
+				<input type="submit" value="Enregistrez">  
 			</form>
 			
 		 </td>

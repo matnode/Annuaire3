@@ -1,4 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls.static import static
+from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -18,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^user/$', 'Contactapps.views.index'),
     url(r'^user/nouveaulieu/$', 'Contactapps.views.nouveaulieu'),
     url(r'^user/nouveaucontact/$', 'Contactapps.views.nouveaucontact'),
+    url(r'^user/(?P<contact_id>\d+)/nouvellephoto/$', 'Contactapps.views.nouvellephoto'),
     #url utiliser pour le listing des donnees (utilisateur, lieu et contact)
     url(r'^user/contact/$', 'Contactapps.views.contacts'),
     url(r'^user/(?P<contact_id>\d+)/detail/$', 'Contactapps.views.detailinfocontact'),
@@ -27,3 +30,4 @@ urlpatterns = patterns('',
     url(r'^connexion/$', 'Contactapps.views.connexion'),
     url(r'deconnexion/$', 'Contactapps.views.deconnexion'),
 )
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
