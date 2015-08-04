@@ -7,6 +7,9 @@
 #fichier binaire
 *.pyc
 *.pyo
+*.jpg
+*.jpeg
+
 
 #configuration du projet
 conf.py

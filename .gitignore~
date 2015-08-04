@@ -8,10 +8,6 @@
 *.pyc
 *.pyo
 
-#database
-*.db
-db.sqlite
-
 #configuration du projet
 conf.py
 
