@@ -9,9 +9,9 @@
 <h1> 
 	La liste des Lieux disponible 
 </h1>
-
-<a href="/user/nouveaulieu/" style="text-decoration:none;"> Ajouter un lieu  {{currentuser.user.username}}  </a> <br>
-
+{% if  currentuser.user.ajouter_lieu %}
+	<a href="/user/nouveaulieu/" style="text-decoration:none;"> Ajouter un lieu  {{currentuser.user.username}}  </a> <br>
+{% endif %}
 <table border=1>
 		
 		<tr>	 	

@@ -25,6 +25,10 @@ class Lieu(models.Model):
 		return self.region
 	def __unicode__(self):
 		return self.ville
+	class Meta:
+		permissions = (
+			("ajouter_lieu","ajouter un lieu"),
+	)
 
 
 class Contact(models.Model):
