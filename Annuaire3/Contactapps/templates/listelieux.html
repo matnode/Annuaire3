@@ -7,11 +7,13 @@
 <body>
 
 <h1> 
-	La liste des Lieux disponible 
+	La liste des Lieux disponible
 </h1>
-{% if  currentuser.user.ajouter_lieu %}
+
+{% if perms.Contactapps.ajouter_lieu %}
 	<a href="/user/nouveaulieu/" style="text-decoration:none;"> Ajouter un lieu  {{currentuser.user.username}}  </a> <br>
 {% endif %}
+
 <table border=1>
 		
 		<tr>	 	

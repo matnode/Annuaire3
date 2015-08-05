@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, get_object_or_404
-from django.template import RequestContext
+from django.template import RequestContext, loader, Context
 from django.contrib.auth.models import User
 from Contactapps.models import Human, Lieu, Contact
 from django.utils import timezone
@@ -121,9 +121,13 @@ def lieux(request):
 	
 	#1. on liste tous les lieux 
 	leslieux = Lieu.objects.all()	
-	currentuser =request	
-	return render_to_response("templates/listelieux.html",{'leslieux':leslieux,'currentuser':currentuser})
+	currentuser =request
+	
+	t = loader.get_template("templates/listelieux.html")
+	
+	return render_to_response("templates/listelieux.html",{'currentuser':currentuser,'leslieux': leslieux},context_instance=RequestContext(request))
 
+		
 
 @login_required(login_url='/connexion/',redirect_field_name='rediriger_vers')
 def consoleadmin(request):	

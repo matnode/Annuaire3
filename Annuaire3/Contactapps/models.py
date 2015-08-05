@@ -27,8 +27,8 @@ class Lieu(models.Model):
 		return self.ville
 	class Meta:
 		permissions = (
-			("ajouter_lieu","ajouter un lieu"),
-	)
+			('ajouter_lieu','ajouter un lieu'),
+		)
 
 
 class Contact(models.Model):
