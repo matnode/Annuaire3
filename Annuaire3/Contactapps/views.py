@@ -6,12 +6,12 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext, loader, Context
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission
+from django.contrib.contenttypes.models import ContentType
 from Contactapps.models import Human, Lieu, Contact
 from django.utils import timezone
 from Contactapps.forms import ContactForm
 import random, sha, string
-
 
 
 def index(request):	
@@ -56,6 +56,41 @@ def nouveaulieu(request):
 		return HttpResponseRedirect(reverse('Contactapps.views.lieux'))	
 	
 	return render_to_response("templates/lieu.html", context_instance=RequestContext(request))
+
+
+@login_required(redirect_field_name='rediriger_vers')
+def nouvellepermission(request):
+	currentuser =request
+	#on demarre avec l'enregistrement d'un nouveau lieu
+	if request.method == 'POST':
+		#on sauvegarde le tout dans notre base de donnees
+		content_type = ContentType.objects.get_for_model(Human)
+		permission = Permission.objects.create(codename=request.POST['codename'],
+                                       name=request.POST['name'],
+                                       content_type=content_type)
+		
+		#une fois le lieu enregistrer on redirige vers la page de listing des lieux presents
+		return HttpResponseRedirect(reverse('Contactapps.views.consoleadmin'))	
+	
+	return render_to_response("templates/permission.html",{'currentuser':currentuser},context_instance=RequestContext(request))
+
+
+
+@login_required(redirect_field_name='rediriger_vers')
+def gestionpermission(request):
+	currentuser =request
+	users = User.objects.all()
+	permissions = Permission.objects.all()
+	#on demarre avec l'enregistrement d'un nouveau lieu
+	if request.method == 'POST':
+		#on reccupere les infos de notre formulaire et on applique la permission sur notre utilisateur
+		user = User.objects.get(pk=request.POST['idusername'])
+		permission = Permission.objects.get(codename=request.POST['codename'])
+		user.user_permissions.add(permission)
+		#une fois le lieu enregistrer on redirige vers la page de listing des lieux presents
+		return HttpResponseRedirect(reverse('Contactapps.views.gestionpermission'))	
+	
+	return render_to_response("templates/gestionpermission.html",{'currentuser':currentuser,'users':users,'permissions':permissions},context_instance=RequestContext(request))
 
 
 
@@ -134,7 +169,7 @@ def consoleadmin(request):
 	
 	#1. on reccupere l'utilisateur courant
 	currentuser =request	
-	return render_to_response("templates/consoleadmin.html",{'currentuser':currentuser})
+	return render_to_response("templates/consoleadmin.html",{'currentuser':currentuser},context_instance=RequestContext(request))
 
 
 @login_required(redirect_field_name='rediriger_vers')
@@ -155,6 +190,25 @@ def detailinfocontact(request,contact_id):
 	context_instance=RequestContext(request)
 	return render_to_response("templates/detailinfocontact.html",{'form':form,'moncontact':moncontact,'currentuser':currentuser},context_instance)
 
+@login_required(redirect_field_name='rediriger_vers')
+def supprimercontact(request,contact_id):	
+	
+	#1. on supprime le contact
+	moncontact = Contact.objects.get(pk=contact_id)	
+	moncontact.delete()
+	return HttpResponseRedirect(reverse('Contactapps.views.contacts'))
+	
+@login_required(redirect_field_name='rediriger_vers')
+def supprimeruser(request,human_id):	
+	
+	#1. on liste tous les lieux 
+	human = Human.objects.get(pk=human_id)
+	
+	#on supprime aussi ces contacts
+	mescontacts = Contact.objects.filter(human=human_id)
+	mescontacts.delete()
+	human.delete()	
+	return HttpResponseRedirect(reverse('Contactapps.views.users'))
 
 
 def connexion(request):	

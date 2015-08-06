@@ -26,11 +26,8 @@
 			<td> {{user.user.username}} </td>
 			<td> {{user.user.email}} </td>  
 			<td> {{user.skypeid}} </td>
-			<td> 
-				
-				{{user.online}} 
-
-			</td>						
+			<td> {{user.online}} </td>
+			<td> <a href="/user/{{user.id}}/supprimer">supprimer</a> </td>						
 		</tr>
 	{% endfor %}		
 

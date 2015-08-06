@@ -1,0 +1,32 @@
+<html>
+
+<head>
+	<title> Un gestionnaire contact perso </title>
+</head>
+
+<body>
+
+<a href="/user/contact/"> Mes contacts </a> | <a href="/user/gestionpermission/"> gérer les permissions </a> | <a  href="/user/consoledadministration/"> console d'administration </a>
+<br>
+
+	<h1>Crée une permission {{currentuser.user.username}} </h1>
+	
+<br>
+
+
+<h2> Nouveau permission </h2>
+
+	<form method="POST" action="/user/nouvellepermission/">{% csrf_token %}
+		<label for="codename" > Code Name </label> 
+			<input  id="nom" type="text" name="codename" required><br><br>
+		<label for="name" >name </label>
+			<input id="name" type="text" name="name" required> <br><br>
+		
+		<br>
+		<button type="submit"> Enregistrez </button>
+	</form>
+
+</body>
+
+
+</html>

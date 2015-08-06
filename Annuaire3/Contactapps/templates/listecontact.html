@@ -6,6 +6,8 @@
 
 <body>
 
+	<a href="/user/contact/"> Mes contacts </a> |  <a  href="/user/nouveaucontact/"> Ajouter un contact </a> |  <a  href="/user/consoledadministration/"> console d'administration </a> |  <a  href="/deconnexion/"> deconnexion </a>
+
 {% if nombredecontact == 0  %}
 	<h1> 
 		votre liste de contacts est vide {{currentuser.user.username}}
@@ -16,7 +18,7 @@
 	</h1>
 {% endif %}
 
-<a href="/user/nouveaucontact/"> Ajouter un contact </a> | <a href="/user/consoledadministration/"> Console d'administration </a><br><br>
+
 <table border=1>
 	<tr>	 	
 		<th> N° </th>			
@@ -32,7 +34,10 @@
 			<td> {{contact.names}} </td> 
 			<td> {{contact.secondnames}} </td>
 			<td> {{contact.lieu.ville}} </td> 			
-			<td> <a href="/user/{{contact.id}}/detail/"> détail </a></td>
+			<td> 	
+				<a href="/user/{{contact.id}}/detail/"> détail </a> | 
+				 <a href="/user/{{contact.id}}/supprimercontact/"> supprimer </a>
+			</td>
 		</tr>
 	{% endfor %}	
 

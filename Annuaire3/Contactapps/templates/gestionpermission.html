@@ -1,0 +1,44 @@
+<html>
+
+<head>
+	<title> Un gestionnaire contact perso </title>
+</head>
+
+<body>
+
+<a href="/user/contact/"> Mes contacts </a> |
+<a  href="/user/consoledadministration/"> console d'administration </a> |
+{% if perms.Contactapps.super_admin %}
+<a href="/user/nouvellepermission/">ajouter une permission </a><br><br>
+{% endif %}
+
+
+<h2> attribuer permission {{currentuser.user.username}} </h2>
+
+	<form method="POST" action="/user/gestionpermission/">{% csrf_token %}
+		
+		<label for="name" >l'utilisateur </label>
+			<select name="idusername" required> 
+					<option value=""></option>
+				{% for user in users%}
+					<option value="{{user.id}}">{{user.username}} </option>
+				{% endfor %}			
+			</select>
+
+
+		<label for="name" >aura pour permission </label>
+			<select name="codename" required> 
+					<option value=""></option>
+				{% for permission in permissions%}	
+					<option value="{{permission.codename}}">{{permission.name}} </option>
+				{% endfor %}				
+			</select>
+
+		<br> <br>
+		<button type="submit"> Enregistrez </button>
+	</form>
+
+</body>
+
+
+</html>
