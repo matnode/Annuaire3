@@ -212,7 +212,7 @@ def supprimeruser(request,human_id):
 
 
 def connexion(request):	
-	
+	message=""
 	if request.method == 'POST':	
 		username = request.POST['username']
 	   	password = request.POST['password']
@@ -224,9 +224,10 @@ def connexion(request):
 			else:
 				return HttpResponse('votre compte a ete desactive')
 		else:
-			return HttpResponse('Login ou mot de passe incorrecte')			
+			message='<div class="alert alert-danger" > <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button> Login ou mot de passe incorrecte </div>'
 			
-	return render_to_response("templates/connexion.html",context_instance=RequestContext(request))
+			
+	return render_to_response("templates/connexion.html",{'message':message}, context_instance=RequestContext(request))
 
 
 

@@ -1,0 +1,20 @@
+body {
+    background: white url("../fonts/background.jpg") no-repeat;
+    background-size:cover;
+}
+
+.headerconnection{
+background-color:#fafafa;
+ text-align:center
+}
+
+div.headerconnection>h1{
+color:#990099;
+}
+
+.connectionpanel{
+background-color:#fafafa; 
+margin-top:5%;
+box-shadow: 3px 3px 10px #333;
+border-radius:5px;
+}
