@@ -2,67 +2,109 @@
 
 <head>
 	<title> Mes contacts</title>
+	
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/perso.css' %}" />
+
+
+	
 </head>
 
 <body>
 
+	<nav class="navbar tune-navbar navbar-default" style="background-color:#990099; color:#fff;">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#" style="color:#fff; font-weight:700">Annuaire</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+             
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="/user/contact/"> Mes contacts </a> </li>
+                <li> <a  href="/user/nouveaucontact/"> Ajouter un contact </a> </li>
+                <li> <a  href="/user/consoledadministration/"> console d'administration </a>       </li>
+              </ul>
+             
+              <ul class="nav navbar-nav navbar-right">
+               
+                <li >  <a  href="/deconnexion/"> deconnexion </a> </li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
 
 
-<a href="/user/nouveaucontact/"> Ajouter un contact </a> |
-<a href="/user/contact/"> Retour </a> 
+<div class="container">
 
-<br><br>
-<table border=1>
-	<tr>						
+    <div class="row">
+       
+       <div class="col-md-12">
+       
+        <table class="table table-hover table-bordered">
+	        <tr>						
 		
-		<td> 
-			{% if  moncontact.photo %}
-			 <img src="{{ moncontact.photo.url }}" style="width:2OOpx; height:200px;"/>		
-			{%endif%}
-		 </td>
+		        <td> 
+			        {% if  moncontact.photo %}
+			         <img src="{{ moncontact.photo.url }}" style="width:2OOpx; height:200px;"/>		
+			        {%endif%}
+		         </td>
 				
-	</tr>
-	<tr>						
+	        </tr>
+	        <tr>						
 		
-		<td> Ajouter une photo <br>
+		        <td> Ajouter une photo <br>
 		
-			<form method="post" action="/user/{{moncontact.id}}/nouvellephoto/" enctype="multipart/form-data">
-				 {% csrf_token %}
-				 {{ form.as_p }}
-				<input type="submit" value="Enregistrez">  
-			</form>
+			        <form method="post" action="/user/{{moncontact.id}}/nouvellephoto/" enctype="multipart/form-data">
+				         {% csrf_token %}
+				         {{ form.as_p }}
+				        <input type="submit" class="btn btn-primary" value="Enregistrez">  
+			        </form>
 			
-		 </td>
+		         </td>
 				
-	</tr>
+	        </tr>
 
-	<tr>						
+	        <tr>						
 		
-		<td> {{moncontact.names}} {{moncontact.secondnames}}  </td>
+		        <td> {{moncontact.names}} {{moncontact.secondnames}}  </td>
 				
-	</tr>
+	        </tr>
 	
-	<tr>	 	
+	        <tr>	 	
 					
-		<td> Date d'anniversaire:  {{moncontact.birthday}} </td>
+		        <td> Date d'anniversaire:  {{moncontact.birthday}} </td>
 			
-	</tr>
+	        </tr>
 
-	<tr>	 	
+	        <tr>	 	
 					
-		<td> localisation actuelle : {{moncontact.lieu.pays}} -> {{moncontact.lieu.region}} -> {{moncontact.lieu.ville}} </td>
+		        <td> localisation actuelle : {{moncontact.lieu.pays}} -> {{moncontact.lieu.region}} -> {{moncontact.lieu.ville}} </td>
 				
-	</tr>
+	        </tr>
 
-	<tr>	 	
+	        <tr>	 	
 					
-		<td>Enregistrez le : {{moncontact.date_creation}} </td>
+		        <td>Enregistrez le : {{moncontact.date_creation}} </td>
 				
-	</tr>
+	        </tr>
 	
 
-</table>
+        </table>
+
+           </div>
 
 </body>
+<script src="{% static 'js/jquery.min.js' %}" /><script>
 
+<script src="{% static 'js/bootstrap.min.js' %}" /><script>
 </html>

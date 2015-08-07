@@ -1,4 +1,4 @@
-body {
+body.bodyconnection {
     background: white url("../fonts/background.jpg") no-repeat;
     background-size:cover;
 }
@@ -16,5 +16,9 @@ color:#990099;
 background-color:#fafafa; 
 margin-top:5%;
 box-shadow: 3px 3px 10px #333;
-border-radius:3px;
+border-radius:5px;
+}
+
+.tune-navbar .navbar-nav > li > a{
+color: #563D7C;
 }

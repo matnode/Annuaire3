@@ -2,40 +2,82 @@
 
 <head>
 	<title> Gestionnaire de contact</title>
+	
+	
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/perso.css' %}" />
+
+	
 </head>
 
 <body>
 
-<a href="/user/contact/"> Mes contacts </a> |  <a  href="/user/nouveaucontact/"> Ajouter un contact </a> |  <a  href="/user/consoledadministration/"> console d'administration </a> |  <a  href="/deconnexion/"> deconnexion </a>
+	<nav class="navbar tune-navbar navbar-default" style="background-color:#990099; color:#fff;">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#" style="color:#fff; font-weight:700">Annuaire</a>
+            </div>
 
-<h1> 
-	La liste des Lieux disponible
-</h1>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+             
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="/user/contact/"> Mes contacts </a> </li>
+                <li> <a  href="/user/nouveaucontact/"> Ajouter un contact </a> </li>
+                <li> <a  href="/user/consoledadministration/"> console d'administration </a>       </li>
+              </ul>
+             
+              <ul class="nav navbar-nav navbar-right">
+               
+                <li >  <a  href="/deconnexion/"> deconnexion </a> </li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+	
+<div class="container">
 
-{% if perms.Contactapps.ajouter_lieu %}
-	<a href="/user/nouveaulieu/" style="text-decoration:none;"> Ajouter un lieu  {{currentuser.user.username}}  </a> <br>
-{% endif %}
+    <div class="row">
+       
+       <div class="col-md-12">
+                <h1> 
+	                Liste des Lieux disponibles
+                </h1>
 
-<table border=1>
+                {% if perms.Contactapps.ajouter_lieu %}
+	                   <a href="/user/nouveaulieu/" style="text-decoration:none;"> Ajouter un lieu  {{currentuser.user.username}}  </a> <br>
+                {% endif %}
+
+                <table class="table table-hover table-bordered">
 		
-		<tr>	 	
-			<th> Pays </th>
-			<th> Région </th>
-			<th> Ville </th>		
-		</tr>
+		                <tr>	 	
+			                <th> Pays </th>
+			                <th> Région </th>
+			                <th> Ville </th>		
+		                </tr>
 
-	{% for lieu in leslieux  %}
-		<tr>		 	
-			<td> {{lieu.pays}} </td> 
-			<td> {{lieu.region}} </td>
-			<td> {{lieu.ville}} </td> 			
-		</tr>
-	{% endfor %}	
+	                {% for lieu in leslieux  %}
+		                <tr>		 	
+			                <td> {{lieu.pays}} </td> 
+			                <td> {{lieu.region}} </td>
+			                <td> {{lieu.ville}} </td> 			
+		                </tr>
+	                {% endfor %}	
 
 	
 
-</table>
-
+                </table>
+       </div>
 </body>
+<script src="{% static 'js/jquery.min.js' %}" /><script>
 
+<script src="{% static 'js/bootstrap.min.js' %}" /><script>
 </html>

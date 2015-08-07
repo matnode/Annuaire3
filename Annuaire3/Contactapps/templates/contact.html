@@ -1,32 +1,73 @@
 <html>
 
 <head>
-	<title> Un gestionnaire contact perso </title>
+	<title> Mes contacts</title>
+	
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/perso.css' %}" />
+
+
+	
 </head>
 
 <body>
 
-	<a href="/user/contact/"> Mes contacts </a> |  <a  href="/user/nouveaucontact/"> Ajouter un contact </a> |  <a  href="/user/consoledadministration/"> console d'administration </a> |  <a  href="/deconnexion/"> deconnexion </a>
+	<nav class="navbar tune-navbar navbar-default" style="background-color:#990099; color:#fff;">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#" style="color:#fff; font-weight:700">Annuaire</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+             
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="/user/contact/"> Mes contacts </a> </li>
+                <li> <a  href="/user/nouveaucontact/"> Ajouter un contact </a> </li>
+                <li> <a  href="/user/consoledadministration/"> console d'administration </a>       </li>
+              </ul>
+             
+              <ul class="nav navbar-nav navbar-right">
+               
+                <li >  <a  href="/deconnexion/"> deconnexion </a> </li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
 
 
+
+	
+<div class="container">
+
+    <div class="row">
+       
+       <div class="col-md-12">
+       
 	<h1> Gestionnaire de contact de {{currentuser.user.username}} </h1>
 	
-<br>
-
-
-<h2> Nouveau contact </h2>
+    <br>
+        <h2> Nouveau contact </h2>
 
 	<form method="POST" action="/user/nouveaucontact/">{% csrf_token %}
 		<label id="nom" > Noms </label> 
-			<input  id="nom" type="text" name="nom" required><br><br>
+			<input  id="nom" class="form-control" type="text" name="nom" required><br><br>
 		<label id="prenom" >Prénoms </label>
-			<input id="prenom" type="text" name="prenom" required> <br><br>
+			<input id="prenom" class="form-control" type="text" name="prenom" required> <br><br>
 		<label id="dateanniv" > Date d'anniversaire </label>
-			<input id="dateanniv" type="text" name="dateanniv" > <br> <br>
+			<input id="dateanniv" class="form-control" type="text" name="dateanniv" > <br> <br>
 
 		<label id="villeactuel" > Ville actuelle </label>	
 		
-			<select name="lieu">
+			<select name="lieu" class="form-control">
 				{% if leslieux %}					
 				    {% for lieu in leslieux %}
 					<option value="{{lieu.id}}"> {{lieu.ville}} </option>
@@ -35,10 +76,14 @@
 			</select> <br>
 	
 		<br>
-		<button type="submit"> Enregistrez </button>
+		<button type="submit" class="btn btn-default"> Enregistrez </button>
 	</form>
 
+     </div>
+  </div>
+</div>
 </body>
+<script src="{% static 'js/jquery.min.js' %}" /><script>
 
-
+<script src="{% static 'js/bootstrap.min.js' %}" /><script>
 </html>

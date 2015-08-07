@@ -1,38 +1,45 @@
 <html>
 
 <head>
-	<title> Gestionnaire de contact</title>
+
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/perso.css' %}" />
+
+
+	<title> Gestionnaires de contacts </title>
 </head>
 
-<body>
+	
+<div class="container">
 
-<h1> 
-	La liste des Utilisateurs disponible 
-</h1>
+    <div class="row">
+       
+       <div class="col-md-12">
 
-<a href="/user/"> Ajouter un utilisateur  </a> <br>
+        <a href="/user/"> Ajouter un utilisateur  </a> <br>
 
-<table border=1>
+            <table class="table table-hover table-bordered">
 		
-		<tr>	 	
-			<th> Nom d'utilisateur </th>
-			<th> email </th>
-			<th> skypeId </th>
-			<th> Online </th>		
-		</tr>
+		            <tr>	 	
+			            <th> Nom d'utilisateur </th>
+			            <th> email </th>
+			            <th> skypeId </th>
+			            <th> Online </th>		
+		            </tr>
 
-	{% for user in utilisateurs  %}
-		<tr>		 	
-			<td> {{user.user.username}} </td>
-			<td> {{user.user.email}} </td>  
-			<td> {{user.skypeid}} </td>
-			<td> {{user.online}} </td>
-			<td> <a href="/user/{{user.id}}/supprimer">supprimer</a> </td>						
-		</tr>
-	{% endfor %}		
+	            {% for user in utilisateurs  %}
+		            <tr>		 	
+			            <td> {{user.user.username}} </td>
+			            <td> {{user.user.email}} </td>  
+			            <td> {{user.skypeid}} </td>
+			            <td> {{user.online}} </td>
+			            <td> <a href="/user/{{user.id}}/supprimer" class="btn btn-default">supprimer</a> </td>						
+		            </tr>
+	            {% endfor %}		
 
-</table>
-
+            </table>
+        </div>
 </body>
 
 </html>

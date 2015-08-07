@@ -2,30 +2,51 @@
 
 <head>
 	<title> Un gestionnaire contact perso </title>
+	
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/perso.css' %}" />
+
+
 </head>
 
-<body>
-	<h1> Bienvenue sur votre gestionnaire de contact  </h1>
+
+<body class="bodyconnection">
+
+<div class="container">
+
+	<div class="row">
+		
+		<div class="col-md-12 headerconnection">
+
+			<h1> Bienvenue sur votre gestionnaire de contact </h1>
 	
-<br>
-<br>
+		</div>
+	<div class="col-md-4"></div>
+	<div class="col-md-4 connectionpanel">
+		
+        <h3> Inscrivez-vous pour une meilleur appréciation </h3>
 
-<h2> Inscrivez-vous pour une meilleur appréciation </h2>
-
-	<form method="POST" action="/user/">
-		{% csrf_token %}
-		<label id="username" > Nom d'utilisateur </label> 
-			<input  id="username" type="text" name="username" required><br>
-		<label id="email" > Email </label> 
-			<input  id="email" type="email" name="email" required><br>
-		<label id="password" > Mot de passe </label>
-			<input id="password" type="password" name="password" required> <br>
-		<label id="skypeid" > Skype ID </label>
-			<input id="skypeid" type="text" name="skypeid" > <br>  <br>
-		<button type="submit"> Inscription </button>
-	</form>
+	    <form method="POST" action="/user/">
+		    {% csrf_token %}
+		    <label id="username" > Nom d'utilisateur </label> 
+			    <input  id="username" class="form-control" type="text" name="username" required><br>
+		    <label id="email" > Email </label> 
+			    <input  id="email"  class="form-control" type="email" name="email" required><br>
+		    <label id="password" > Mot de passe </label>
+			    <input id="password"  class="form-control" type="password" name="password" required> <br>
+		    <label id="skypeid" > Skype ID </label>
+			    <input id="skypeid"  class="form-control"  type="text" name="skypeid" > <br>  <br>
+		    <button type="submit" class="btn btn-default"> <span class="glyphicon glyphicon-user" style="color:#990099;"></span> Inscription </button>
+	    </form>
+	    
+	</div>
+	<div class="col-md-4"></div>
 
 </body>
+<script src="{% static 'js/jquery.min.js' %}" /><script>
+<script src="{% static 'js/bootstrap.min.js' %}" /><script>
+
 
 
 </html>
